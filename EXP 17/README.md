@@ -1,0 +1,26 @@
+UART INTERFACING USING INTERRUPT IN KEIL
+
+#include <reg51.h>
+
+void serial_ISR(void) interrupt 4
+{
+    if(RI)
+    {
+        P1 = SBUF;
+        RI = 0;
+    }
+}
+
+void main()
+{
+    TMOD = 0x20;
+    TH1 = 0xFD;
+    SCON = 0x50;
+    TR1 = 1;
+ADA
+	
+    ES = 1;
+    EA = 1;
+
+    while(1);
+}
